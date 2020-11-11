@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper and Scissors</title>
+    <script>
+        let playerWins=0;
+        let computerWins=0;
+
+        function getRandomArbitrary(min, max) {
+           return Math.random() * (max - min) + min;
+        }
+        
+        function computerPlay(){
+            let options = ["paper" , "rock", "scissor"];
+            return options[Math.trunc(getRandomArbitrary(0,3))];
+        }
+
+        function playRound(playerSelection, computerSelection){
+            
+            let results = [
+                "You Lose! Paper beats Rock",
+                "You Lose! Scissors beats Paper",
+                "You Lose! Rock beats scissors", 
+                "You Win! Paper beats Rock",
+                "You Win! Scissors beats Paper",
+                "You Win! Rock beats scissors",
+                "it's a tight"
+                ];
+
+                playerSelection=playerSelection.toLowerCase();
+                console.log(playerSelection + "**" + computerSelection);
+                if (playerSelection=="rock" && computerSelection=="paper"){
+                    playerWins=playerWins + 1;
+                    return results[0];
+                }
+                if (playerSelection=="rock" && computerSelection=="scissor"){
+                    computerWins= computerWins + 1;
+                    return results[5];
+                }
+                if (playerSelection=="rock" && computerSelection=="rock"){
+                    return results[6];
+                }
+                if (playerSelection=="paper" && computerSelection=="rock"){
+                    playerWins+=1;
+                    return results[3];
+                }
+                if(playerSelection=="paper" && computerSelection=="scissor"){
+                    computerWins+=1;
+                    return results[1];
+                }
+                if(playerSelection=="paper" && computerSelection=="paper"){
+                    return results[6];
+                }
+                if(playerSelection=="scissor" && computerSelection=="paper"){
+                    playerWins+=1;
+                    return results[4];
+                }
+                if(playerSelection=="scissor" && computerSelection=="rock"){
+                    computerWins+=1;
+                    return results[2];
+                }
+                if(playerSelection=="scissor" && computerSelection=="scissor"){
+                    return results[6];
+                }
+        }
+
+
+        function game(){
+            for(let i=0; i<5; i++){
+                computerSelection=computerPlay();
+                playerSelection =  prompt("Please enter your name");
+                playRound(playerSelection, computerSelection);
+                
+            }
+
+            if(playerWins>computerWins){
+                console.log("The player wins with "+playerWins + " wins");
+            }else if(playerWins<computerWins){
+                console.log("The computer wins with " + computerWins + " wins");
+            }else {
+                console.log("It's a tight");
+            }
+        }
+
+        let computerSelection= computerPlay();
+        let playerSelection =  "";
+        game();
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
